@@ -193,6 +193,9 @@ class UsuarioDAO:
     def login(self, correo, password):
 
         conexion = Conexion.obtener_conexion()
+        if conexion is None:
+            print("Error: No se pudo establecer la conexión a la base de datos.")
+            return None
 
         cursor = conexion.cursor()
 
