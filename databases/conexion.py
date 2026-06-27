@@ -22,10 +22,8 @@ class Conexion:
             return conn
         except Exception as e:
             print("\n❌ NO SE PUDO CONECTAR A POSTGRESQL ❌")
-            try:
-                # Si el error trae acentos raros, lo decodificamos a la fuerza
-                error_limpio = str(e).encode('utf-8', errors='ignore').decode('utf-8')
-                print(f"Razón: {error_limpio}")
-            except:
-                print(f"Razón: Error en los datos de conexión del archivo .env")
+            # Convertimos el error a texto de forma segura sin importar los acentos de Windows
+            error_seguro = repr(e)
+            print(f"Detalle técnico: {error_seguro}")
+            print("👉 Revisa que los datos de tu archivo .env coincidan exactamente con pgAdmin.")
             return None
